@@ -36,16 +36,21 @@ class AllOne {
             }
             else {
                 dict.erase(key);
-                minkeys.erase(key);
+                if (minkeys.find(key) != minkeys.end())
+                    minkeys.erase(key);
             }
         }
     }
 
     const std::string getMaxKey() {
+        if (maxkeys.empty())
+            return "";
         return *maxkeys.begin();
     }
 
     const std::string getMinKey() {
+        if (minkeys.empty())
+            return "";
         return *minkeys.begin();
     }
 
@@ -58,16 +63,23 @@ class AllOne {
 int main() {
     AllOne allOne;
 
-    allOne.inc("one");
+    std::cout << "Before incrementing any string:\n";
     std::cout << "The key with max value is " << allOne.getMaxKey() << std::endl;
     std::cout << "The key with min value is " << allOne.getMinKey() << std::endl;
     allOne.inc("one");
+    std::cout << "After incrementing one:\n";
+    std::cout << "The key with max value is " << allOne.getMaxKey() << std::endl;
+    std::cout << "The key with min value is " << allOne.getMinKey() << std::endl;
+    allOne.inc("one");
+    std::cout << "After incrementing one:\n";
     std::cout << "The key with max value is " << allOne.getMaxKey() << std::endl;
     std::cout << "The key with min value is " << allOne.getMinKey() << std::endl;
     allOne.inc("two");
+    std::cout << "After incrementing two:\n";
     std::cout << "The key with max value is " << allOne.getMaxKey() << std::endl;
     std::cout << "The key with min value is " << allOne.getMinKey() << std::endl;
-    allOne.dec("one");
+    allOne.dec("two");
+    std::cout << "After decrementing two:\n";
     std::cout << "The key with max value is " << allOne.getMaxKey() << std::endl;
     std::cout << "The key with min value is " << allOne.getMinKey() << std::endl;
 }
